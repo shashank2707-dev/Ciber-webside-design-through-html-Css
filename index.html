@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CyberCity Interface — Neon UI</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Canvas for digital rain -->
+  <canvas id="rain-canvas" class="rain-canvas"></canvas>
+
+  <!-- Main container -->
+  <div class="app">
+
+    <!-- Top Navbar -->
+    <header class="navbar">
+      <div class="logo neon">CYBER<span class="accent">CITY</span></div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="right-controls">
+        <button class="neon-btn" id="openSidebar">☰</button>
+        <button class="neon-btn" id="toggleTheme">🌓</button>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <button id="closeSidebar" class="close">✕</button>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">Profile</a></li>
+        <li><a href="#features">Services</a></li>
+        <li><a href="#projects">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="sidebar-footer">v1.0 — Neon UI</div>
+    </aside>
+
+    <!-- Hero Section -->
+    <main id="hero" class="hero">
+      <div class="city-bg" aria-hidden="true">
+        <!-- Simple SVG skyline (inline) -->
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="none" class="skyline">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#0b0028"/>
+              <stop offset="1" stop-color="#03010a"/>
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="300" fill="url(#g1)"></rect>
+
+          <!-- stylized buildings -->
+          <g class="buildings" fill="none" stroke-width="2">
+            <path d="M0 200 L40 200 L40 120 L80 120 L80 200 L120 200 L120 60 L160 60 L160 200 L200 200 L200 100 L240 100 L240 200 L300 200 L300 40 L360 40 L360 200 L420 200 L420 140 L480 140 L480 200 L560 200 L560 80 L620 80 L620 200 L700 200 L700 30 L760 30 L760 200 L840 200 L840 100 L920 100 L920 200 L1000 200 L1000 50 L1100 50 L1100 200 L1200 200"></path>
+          </g>
+
+          <!-- neon lines -->
+          <g class="neon-lines" stroke-linecap="round" stroke-width="2" stroke="#00eaff" opacity="0.12">
+            <path d="M0 210 L1200 210"></path>
+            <path d="M0 230 L1200 230"></path>
+            <path d="M0 250 L1200 250"></path>
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="glitch neon-title">WELCOME TO CYBER CITY</h1>
+        <p class="subtitle" id="typed-sub"></p>
+        <div class="hero-cta">
+          <button class="big-neon">Enter City</button>
+          <button class="outline-neon">Explore UI</button>
+        </div>
+      </div>
+
+      <!-- HUD small widgets -->
+      <div class="hud">
+        <div class="radar" title="radar">
+          <div class="radar-rotor"></div>
+        </div>
+
+        <div class="scan-line"></div>
+      </div>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <h2 class="section-title neon">About</h2>
+      <div class="cards">
+        <article class="card hologram">
+          <h3>Identity</h3>
+          <p>Futuristic neon UI concept made with pure HTML/CSS/JS. Focus on glassmorphism and motion.</p>
+          <div class="meta">Status: Prototype</div>
+        </article>
+
+        <article class="card hologram">
+          <h3>Skills</h3>
+          <ul>
+            <li>CSS Animations & Keyframes</li>
+            <li>Canvas Effects</li>
+            <li>Responsive Layout</li>
+          </ul>
+          <div class="meta">No external libs</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section features">
+      <h2 class="section-title neon">Features</h2>
+      <div class="feature-grid">
+        <div class="feature card hologram">
+          <h4>Neon Buttons</h4>
+          <p>Animated borders and glow with click feedback.</p>
+        </div>
+        <div class="feature card hologram">
+          <h4>Glitch Text</h4>
+          <p>Title uses a subtle glitch for mood.</p>
+        </div>
+        <div class="feature card hologram">
+          <h4>Digital Rain</h4>
+          <p>Canvas-based rain gives motion without APIs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / GALLERY -->
+    <section id="projects" class="section projects">
+      <h2 class="section-title neon">Projects</h2>
+      <div class="project-grid">
+        <div class="project card holo-project">3D Flip Card</div>
+        <div class="project card holo-project">Parallax Hero</div>
+        <div class="project card holo-project">HUD Elements</div>
+        <div class="project card holo-project">Liquid Buttons</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <h2 class="section-title neon">Contact</h2>
+      <form class="contact-form">
+        <label>
+          <input type="text" placeholder="Your handle" />
+        </label>
+        <label>
+          <input type="email" placeholder="email@cyber.city" />
+        </label>
+        <label>
+          <textarea placeholder="Message"></textarea>
+        </label>
+        <div class="form-actions">
+          <button class="neon-btn" type="button">Send</button>
+          <button class="neon-btn ghost" type="reset">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div>© CyberCity Interface</div>
+      <div class="footer-links">
+        <a href="#hero">Top</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

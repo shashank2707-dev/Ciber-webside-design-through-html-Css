@@ -1,0 +1,150 @@
+:root{
+  --bg:#05010b;
+  --glass: rgba(255,255,255,0.04);
+  --soft: rgba(255,255,255,0.02);
+  --neon-blue: #00eaff;
+  --neon-mag: #ff009d;
+  --neon-purple: #8a2eff;
+  --neon-green: #39ff14;
+  --accent: var(--neon-mag);
+  --glass-border: rgba(255,255,255,0.06);
+  --glass-shadow: 0 6px 30px rgba(0,0,0,0.7);
+  --card-radius: 12px;
+  color-scheme: dark;
+  font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+}
+
+/* Reset + basics */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.app{position:relative;min-height:100vh;z-index:1;}
+
+/* Canvas sits behind everything */
+.rain-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:64px;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-bottom:1px solid rgba(255,255,255,0.02);
+  z-index:30;
+}
+.logo{font-weight:700;letter-spacing:1px;color:var(--neon-blue);text-shadow:0 0 10px rgba(0,234,255,0.18)}
+.logo .accent{color:var(--accent);text-shadow:0 0 14px rgba(255,0,157,0.12)}
+.nav-links{display:flex;gap:18px;align-items:center}
+.nav-links a{padding:8px 12px;border-radius:8px;color:rgba(255,255,255,0.7);font-size:14px}
+.nav-links a:hover{color:white;box-shadow:0 0 18px rgba(0,234,255,0.06);}
+
+/* Buttons */
+.neon-btn{
+  background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:10px;color:var(--neon-blue);
+  box-shadow:0 4px 18px rgba(0,234,255,0.04), inset 0 -2px 8px rgba(255,255,255,0.02);
+  cursor:pointer;font-weight:600;
+}
+.neon-btn.ghost{color:rgba(255,255,255,0.6)}
+.neon-btn:active{transform:translateY(1px)}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;top:0;right:-320px;width:320px;height:100vh;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-left:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(8px);
+  transition:right .36s cubic-bezier(.2,.9,.2,1);z-index:40;
+  display:flex;flex-direction:column;gap:18px;
+}
+.sidebar.open{right:0}
+.sidebar .close{align-self:flex-end;background:none;border:0;color:rgba(255,255,255,0.6);font-size:18px;cursor:pointer}
+.sidebar ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.sidebar a{padding:12px;border-radius:8px;color:var(--neon-blue);display:block}
+.sidebar-footer{margin-top:auto;color:rgba(255,255,255,0.3);font-size:12px}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;padding:120px 20px 40px;z-index:5}
+.city-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;display:block;pointer-events:none}
+.skyline{position:absolute;left:0;bottom:0;width:140%;height:40vh;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.8));opacity:0.9}
+.buildings path{stroke:rgba(255,255,255,0.06);fill:none}
+.neon-lines path{animation:lineShift 6s linear infinite}
+@keyframes lineShift{from{transform:translateX(-30px)} to{transform:translateX(30px)}}
+
+/* HERO CONTENT */
+.hero-content{text-align:center;color:rgba(255,255,255,0.92);max-width:980px;padding:20px}
+.glitch{font-size:40px;letter-spacing:2px;margin:0 0 12px;position:relative;display:inline-block}
+.neon-title{color:transparent;background:linear-gradient(90deg,var(--neon-blue),var(--accent));-webkit-background-clip:text;background-clip:text;
+ text-shadow:0 0 18px rgba(0,234,255,0.14), 0 0 28px rgba(255,0,157,0.05)}
+/* Glitch effect using pseudo elements */
+.glitch::before,.glitch::after{
+  content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;opacity:0.8;
+  background:inherit;color:inherit;mix-blend-mode:screen;
+}
+.glitch::before{transform:translate(2px,-1px);clip-path: polygon(0 0,100% 0,100% 70%,0 60%);opacity:0.7;filter:blur(0.6px)}
+.glitch::after{transform:translate(-2px,1px);clip-path: polygon(0 40%,100% 30%,100% 100%,0 100%);opacity:0.65;filter:blur(0.9px)}
+/* subtle flicker */
+@keyframes flicker {0%{opacity:1}50%{opacity:.88}100%{opacity:1}}
+.neon-title{animation:flicker 4s linear infinite}
+
+/* typed subtitle */
+.subtitle{font-size:16px;margin-bottom:18px;color:rgba(255,255,255,0.7);min-height:22px}
+
+/* hero ctas */
+.hero-cta{display:flex;gap:14px;justify-content:center;margin-top:12px}
+.big-neon{
+  padding:14px 28px;border-radius:14px;border:1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  color:white;font-weight:700;box-shadow:0 10px 40px rgba(0,234,255,0.06), 0 0 28px rgba(138,46,255,0.03);
+  position:relative;overflow:hidden;
+}
+.big-neon::after{
+  content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;
+  box-shadow:0 0 40px rgba(0,234,255,0.18);
+  opacity:0.9;mix-blend-mode:screen;
+}
+.outline-neon{padding:12px 20px;border-radius:12px;border:1px solid var(--neon-blue);color:var(--neon-blue);background:transparent}
+
+/* HUD */
+.hud{position:absolute;top:100px;left:36px;display:flex;flex-direction:column;gap:18px;z-index:10}
+.radar{width:84px;height:84px;border-radius:50%;border:2px solid rgba(0,234,255,0.08);display:flex;align-items:center;justify-content:center;backdrop-filter: blur(2px);position:relative}
+.radar-rotor{width:70%;height:70%;border-radius:50%;box-shadow:0 0 26px rgba(0,234,255,0.08) inset;animation:spin 6s linear infinite;opacity:0.9}
+@keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+.scan-line{position:absolute;right:10%;top:40%;width:260px;height:2px;background:linear-gradient(90deg,transparent,var(--neon-blue),transparent);opacity:0.45;filter:blur(6px)}
+
+/* Sections */
+.section{padding:64px 20px;z-index:6;position:relative}
+.section-title{font-size:20px;margin:0 0 18px;color:var(--neon-blue);text-shadow:0 0 12px rgba(0,234,255,0.08)}
+.cards{display:flex;gap:18px;flex-wrap:wrap}
+.card{background:var(--glass);border-radius:var(--card-radius);padding:18px;min-width:220px;box-shadow:var(--glass-shadow);border:1px solid var(--glass-border)}
+.hologram{position:relative;overflow:hidden;border-left:1px solid rgba(255,255,255,0.03)}
+.hologram::before{
+  content:"";position:absolute;inset:0;background:linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  transform:translateY(-20%);pointer-events:none
+}
+.meta{margin-top:12px;color:rgba(255,255,255,0.45);font-size:13px}
+
+/* Feature grid */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+
+/* Projects */
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.holo-project{min-height:110px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+
+/* Contact form */
+.contact-form{display:flex;flex-direction:column;gap:12px;max-width:560px}
+.contact-form input,.contact-form textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:rgba(255,255,255,0.9)}
+.contact-form textarea{min-height:100px;resize:vertical}
+.form-actions{display:flex;gap:12px}
+
+/* Footer */
+.footer{padding:28px 20px;display:flex;justify-content:space-between;color:rgba(255,255,255,0.4);border-top:1px solid rgba(255,255,255,0.02)}
+
+/* small screens */
+@media (max-width:880px){
+  .nav-links{display:none}
+  .hero-content{padding:10px}
+  .glitch{font-size:30px}
+  .hud{display:none}
+}
+
+/* Subtle hover micro interactions */
+.card:hover{transform:translateY(-6px);transition:transform .28s ease;box-shadow:0 18px 60px rgba(0,0,0,0.55)}
+.neon-btn, .big-neon, .outline-neon{transition:all .22s ease}
